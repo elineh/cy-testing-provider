@@ -9,8 +9,9 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  SERVERPORT: 3001
+  PORT: 3001
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  DATABASE_URL: 'file:./dev.db'
   # Enable for for cy cloud
   # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
@@ -33,7 +34,7 @@ jobs:
       - name: Cypress e2e tests 🧪
         uses: cypress-io/github-action@v6.7.8
         with:
-          start: npm run mock:server
+          start: npm start
           config-file: cypress/config/local.config.ts
           # Enable for for cy cloud
           # record: true

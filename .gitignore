@@ -21,6 +21,9 @@ npm-debug.log*
 **/downloads
 **/cypress.env.json
 
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
 
 # Pact
 pacts
