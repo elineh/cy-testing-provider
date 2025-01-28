@@ -9,14 +9,14 @@ require('dotenv').config({
   path: path.resolve(__dirname, '../../.env')
 })
 
-const serverPort = process.env.SERVERPORT || 3001
+const port = process.env.PORT || 3001
 
 const config = {
   e2e: {
     env: {
       ENVIRONMENT: 'local'
     },
-    baseUrl: `http://localhost:${serverPort}`
+    baseUrl: `http://localhost:${port}`
   }
 }
 

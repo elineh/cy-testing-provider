@@ -11,7 +11,7 @@ npm i
 Use the sample `.env.example` file to create a `.env` file of your own. These values will also have to exist in your CI secrets.
 
 ```bash
-SERVERPORT=3001
+PORT=3001
 ```
 
 ### Scripts
