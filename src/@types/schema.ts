@@ -3,6 +3,8 @@ import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'
 
 extendZodWithOpenApi(z)
 
+// 1) Create the schemas
+
 export const CreateMovieSchema = z
   .object({
     id: z
