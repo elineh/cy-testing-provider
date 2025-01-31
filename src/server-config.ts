@@ -11,7 +11,7 @@ server.use(json())
 // })
 
 server.get('/', (_, res): void => {
-  res.status(200).json()
+  res.status(200).json({ message: 'Server is running' })
 })
 
 server.use('/auth/fake-token', (_, res) => {
