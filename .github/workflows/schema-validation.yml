@@ -50,6 +50,7 @@ jobs:
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
           push: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.ref_name }}
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
