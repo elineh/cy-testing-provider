@@ -62,7 +62,7 @@ jobs:
         if: env.changes == 'true'
         run: git push origin HEAD:${{ github.head_ref }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
