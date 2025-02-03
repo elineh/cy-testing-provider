@@ -57,8 +57,8 @@ jobs:
           message: 'Update OpenAPI spec'
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
           push: true
-            git push origin HEAD:${{ github.head_ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: HEAD:${{ github.head_ref }} # Ensures pushing to the correct PR branch
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
