@@ -51,13 +51,8 @@ jobs:
           author_email: 'actions@github.com'
           message: 'Update OpenAPI spec'
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
-          push: false
+          push: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push changes
-        if: env.changes == 'true'
-        run: |
-          git push origin HEAD:${{ github.head_ref }}
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
