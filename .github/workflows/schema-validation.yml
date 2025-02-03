@@ -55,6 +55,11 @@ jobs:
           push: true
           github_token: ${{ secrets.PAT_TOKEN }}
 
+      - name: Set upstream and push changes
+        if: env.changes == 'true'
+        run: |
+          git push --set-upstream origin ${{ github.head_ref }}
+
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
         run: |
