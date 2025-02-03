@@ -4,6 +4,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 # if this branch is pushed back to back, cancel the older branch's workflow
 concurrency:
   group: ${{ github.ref }} && ${{ github.workflow }}
@@ -47,7 +51,7 @@ jobs:
       - name: Set upstream and push changes
         if: env.changes == 'true'
         run: |
-          git push --set-upstream origin ${{ github.head_ref }}
+          git push --set-upstream https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} ${{ github.head_ref }}
 
       - name: Commit and push OpenAPI changes
         if: env.changes == 'true'
@@ -58,7 +62,7 @@ jobs:
           message: 'Update OpenAPI spec'
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
           push: true
-          github_token: ${{ secrets.PAT_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
