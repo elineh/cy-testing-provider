@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.head_ref }}´
 
       - uses: actions/setup-node@v4
       - name: Read Node version from .nvmrc
