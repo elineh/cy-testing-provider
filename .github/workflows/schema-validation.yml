@@ -12,9 +12,12 @@ jobs:
   schema-validation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensures full history for branch switching
 
-      - uses: actions/setup-node@v4
+      # - uses: actions/setup-node@v4
       - name: Read Node version from .nvmrc
         id: node_version
         run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
@@ -28,6 +31,11 @@ jobs:
 
       # This workflow exists so we do not have to locally generate the OpenAPI spec
       # If the OpenAPI spec has changed, it commits and pushes those changes back to the PR branch
+
+      - name: Switch to the correct branch
+        run: |
+          git checkout ${{ github.ref_name }}
+
       - name: Generate OpenApi docs from code
         run: npm run generate:openapi
 
@@ -50,7 +58,7 @@ jobs:
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
           push: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.ref_name }}
+          ref: HEAD
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
@@ -58,7 +66,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git commit --allow-empty -m "Re-run checks after OpenAPI update"
-          git push origin HEAD:${{ github.head_ref }}
+          git push
 
       - name: Fetch main branch for Optic
         run: git fetch --depth=1 origin main:main
