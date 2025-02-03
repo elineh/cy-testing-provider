@@ -18,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - uses: actions/setup-node@v4
       - name: Read Node version from .nvmrc
@@ -42,11 +45,6 @@ jobs:
           else
             echo "changes=true" >> $GITHUB_ENV
           fi
-
-      - name: Checkout branch
-        if: env.changes == 'true'
-        run: |
-          git checkout -B ${{ github.head_ref }}
 
       - name: Commit and push OpenAPI changes
         if: env.changes == 'true'
