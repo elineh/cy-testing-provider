@@ -34,7 +34,7 @@ jobs:
       - name: Check if OpenApi docs have changed
         id: check_changes
         run: |
-          git diff --quiet src/api-docs/openapi.yaml src/api-docs/openapi.json; then
+          if git diff --quiet src/api-docs/openapi.yaml src/api-docs/openapi.json; then
             echo "changes=false" >> $GITHUB_ENV
           else
             echo "changes=true" >> $GITHUB_ENV
