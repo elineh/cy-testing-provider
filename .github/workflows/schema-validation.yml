@@ -48,6 +48,11 @@ jobs:
         run: |
           git checkout -B ${{ github.head_ref }}
 
+      - name: Pull latest changes
+        if: env.changes == 'true'
+        run: |
+          git pull origin ${{ github.head_ref }}
+
       - name: Set upstream and push changes
         if: env.changes == 'true'
         run: |
