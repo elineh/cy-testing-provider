@@ -32,9 +32,9 @@ jobs:
       # This workflow exists so we do not have to locally generate the OpenAPI spec
       # If the OpenAPI spec has changed, it commits and pushes those changes back to the PR branch
 
-      - name: Switch to the correct branch
-        run: |
-          git checkout ${{ github.ref_name }}
+      # - name: Switch to the correct branch
+      #   run: |
+      #     git checkout ${{ github.ref_name }}
 
       - name: Generate OpenApi docs from code
         run: npm run generate:openapi
