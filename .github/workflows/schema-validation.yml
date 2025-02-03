@@ -50,13 +50,14 @@ jobs:
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
           push: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
-            git push origin HEAD:${{ github.head_ref }}
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
         run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
           git commit --allow-empty -m "Re-run checks after OpenAPI update"
-          git push
+          git push origin HEAD:${{ github.head_ref }}
 
       - name: Fetch main branch for Optic
         run: git fetch --depth=1 origin main:main
