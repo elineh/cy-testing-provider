@@ -44,6 +44,11 @@ jobs:
         run: |
           git checkout -B ${{ github.head_ref }}
 
+      - name: Set upstream and push changes
+        if: env.changes == 'true'
+        run: |
+          git push --set-upstream origin ${{ github.head_ref }}
+
       - name: Commit and push OpenAPI changes
         if: env.changes == 'true'
         uses: EndBug/add-and-commit@v9
@@ -54,11 +59,6 @@ jobs:
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
           push: true
           github_token: ${{ secrets.PAT_TOKEN }}
-
-      - name: Set upstream and push changes
-        if: env.changes == 'true'
-        run: |
-          git push --set-upstream origin ${{ github.head_ref }}
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
