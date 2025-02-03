@@ -56,9 +56,13 @@ jobs:
           author_email: 'actions@github.com'
           message: 'Update OpenAPI spec'
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
-          push: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          ref: HEAD:${{ github.head_ref }} # Ensures pushing to the correct PR branch
+          push: false
+
+      - name: Manually push changes
+        if: env.changes == 'true'
+        run: git push origin HEAD:${{ github.head_ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
@@ -66,7 +70,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git commit --allow-empty -m "Re-run checks after OpenAPI update"
-          git push
+          git push origin HEAD:${{ github.head_ref }}
 
       - name: Fetch main branch for Optic
         run: git fetch --depth=1 origin main:main
