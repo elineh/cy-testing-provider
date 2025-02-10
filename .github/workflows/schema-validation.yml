@@ -4,9 +4,9 @@ on:
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pull-requests: write
+# permissions:
+#   contents: write
+#   pull-requests: write
 
 # if this branch is pushed back to back, cancel the older branch's workflow
 concurrency:
@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}´
+          ref: ${{ github.head_ref }}
 
       - uses: actions/setup-node@v4
       - name: Read Node version from .nvmrc
