@@ -19,7 +19,7 @@ export type ConflictMovieResponse = z.infer<typeof ConflictMovieResponseSchema>
 
 export type DeleteMovieResponse = z.infer<typeof DeleteMovieResponseSchema>
 
-export type GetMovieResponseUnion = z.infer<typeof GetMovieResponseUnionSchema>
+export type GetMovieResponse = z.infer<typeof GetMovieResponseUnionSchema>
 
 export type MovieNotFoundResponse = z.infer<typeof MovieNotFoundResponseSchema>
 
