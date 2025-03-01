@@ -6,7 +6,93 @@
 GET {{baseUrl}}/auth/fake-token
 
 ###
-# @name heartbeat
+@token = {{generateToken.response.body.token}}
 
+###
+# @name heartbeat
 GET {{baseUrl}}
+
+###
+# @name addMovie
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Inception",
+  "year": 2010,
+  "rating": 7.5
+}
+
+###
+
+@movieId = {{addMovie.response.body.data.id}}
+@movieName = {{addMovie.response.body.data.name}}
+
+###
+# @name getAllMovies
+GET {{baseUrl}}/movies
+Authorization: {{token}}
+
+###
+# @name GetMovieById
+GET {{baseUrl}}/movies/{{movieId}}
+Authorization: {{token}}
+
+###
+# @name getMovieByName
+GET {{baseUrl}}/movies?name={{movieName}}
+Authorization: {{token}}
+
+###
+# @name addDuplicateMovie
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Inception",
+  "year": 2010,
+  "rating": 7.5
+}
+
+###
+# @name addMovieInvalidYear
+POST {{baseUrl}}/movies
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Inception",
+  "year": 1800,
+  "rating": 7.5
+}
+
+###
+# @name updateMovie
+PUT {{baseUrl}}/movies/{{movieId}}
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Inception",
+  "year": 2015,
+  "rating": 8.0
+}
+
+###
+# @name deleteMovie
+DELETE {{baseUrl}}/movies/{{movieId}}
+Authorization: {{token}}
+
+###
+# @name getNoneExistingMovie
+GET {{baseUrl}}/movies/999999
+Authorization: {{token}}
+
+###
+# @name deleteNoneExistingMovie
+DELETE {{baseUrl}}/movies/999999
+Authorization: {{token}}
+
 
