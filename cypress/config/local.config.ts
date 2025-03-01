@@ -16,7 +16,8 @@ const config = {
     env: {
       ENVIRONMENT: 'local'
     },
-    baseUrl: `http://localhost:${port}`
+    baseUrl: `http://localhost:${port}`,
+    retries: 0
   }
 }
 
