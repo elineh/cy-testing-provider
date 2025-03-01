@@ -4,14 +4,17 @@ on:
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pull-requests: write
+# permissions:
+#   contents: write
+#   pull-requests: write
 
 # if this branch is pushed back to back, cancel the older branch's workflow
 concurrency:
   group: ${{ github.ref }} && ${{ github.workflow }}
   cancel-in-progress: true
+
+permissions:
+  contents: write
 
 jobs:
   schema-validation:
@@ -19,7 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # needed for Commit and push OpenAPI changes to work
           ref: ${{ github.head_ref }}
+          persist-credentials: true
 
       - uses: actions/setup-node@v4
       - name: Read Node version from .nvmrc
@@ -54,7 +59,7 @@ jobs:
           message: 'Update OpenAPI spec'
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
           push: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT_TOKEN }}
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
