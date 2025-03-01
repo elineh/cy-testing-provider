@@ -46,7 +46,7 @@ jobs:
           fi
 
       - name: Commit and push OpenAPI changes
-        if: env.changes == 'true'
+        if: steps.check_changes.outputs.changes == 'true'
         uses: EndBug/add-and-commit@v9
         with:
           author_name: 'GitHub Actions'
@@ -55,6 +55,9 @@ jobs:
           add: 'src/api-docs/openapi.yaml src/api-docs/openapi.json'
           push: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+          permissions:
+          contents: write
 
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
