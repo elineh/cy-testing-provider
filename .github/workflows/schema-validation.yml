@@ -62,6 +62,8 @@ jobs:
       - name: Create empty commit to re-run checks
         if: env.changes == 'true'
         run: |
+          git config --global user.email "actions@githib.com"
+          git config --global user.name "GitHub Actions"
           git commit --allow-empty -m "Re-run checks after OpenAPI update"
           git push
 
