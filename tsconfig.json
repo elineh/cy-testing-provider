@@ -5,7 +5,6 @@
     "./jest-pact.config.ts",
     "./.eslintrc.js",
     "cypress",
-    "./cypress/index.d.ts",
     "prisma/client.ts",
     "prisma"
   ],
