@@ -19,7 +19,7 @@
     "test:watch": "jest --watch --config jest.config.ts",
     "test:provider": ". ./scripts/env-setup.sh && jest --config jest-pact.config.ts --runInBand",
     "test:provider-ci": ". ./scripts/env-setup.sh && start-server-and-test start http://localhost:${PORT} test:provider",
-    "can:i:deploy:provider": ". ./scrips/can-i-deploy-provider.sh",
+    "can:i:deploy:provider": ". ./scripts/can-i-deploy-provider.sh",
     "record:provider:deployment": ". ./scripts/record-provider-deployment.sh",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.jest.json",
     "lint": "eslint --ext=.js,.ts,.tsx --fix",
