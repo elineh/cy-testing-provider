@@ -134,3 +134,5 @@ jobs:
         run: |
           echo "Running provider contract tests with PACT_BREAKING_CHANGE=$PACT_BREAKING_CHANGE"
           npm run test:provider-ci
+
+      # trigger
