@@ -11,7 +11,10 @@
     "db:migrate": "npx prisma migrate reset --force --skip-seed generate",
     "db:sync": "npx prisma db push --force-reset && npx prisma generate",
     "reset:db": "tsx ./scripts/global-setup.ts",
-    "start": ". ./scripts/env-setup.sh && npm run db:sync && npm run reset:db && nodemon",
+    "start": ". ./scripts/env-setup.sh && npm run db:sync && npm run reset:db && npm run kafka:reset-logs && nodemon",
+    "kafka:reset-logs": "rm -rf cypress/movie-events.log",
+    "kafka:start": "docker compose -f ./src/events/kafka-cluster.yml up -d --no-recreate",
+    "kafka:stop": "docker compose -f ./src/events/kafka-cluster.yml down",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|ts|json)\"",
     "fix:format": "npm run prettier -- --write",
     "validate": "npm-run-all --parallel typecheck lint test fix:format",
@@ -79,6 +82,7 @@
     "@prisma/client": "^6.2.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "kafkajs": "^2.2.4",
     "prisma": "^6.2.1",
     "zod": "^3.24.1"
   }
