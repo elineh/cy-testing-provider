@@ -11,7 +11,7 @@ concurrency:
 env:
   PORT: 3001
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  DATABASE_URL: 'file:./dev.db's
+  DATABASE_URL: 'file:./dev.db'
   # Enable for for cy cloud
   # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
   KAFKAJS_NO_PARTITIONER_WARNING: 1 # less kafka noise
@@ -32,7 +32,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-
       - name: Generate OpenAPI docs from code
         run: |
           npm install -D tsx
@@ -44,7 +43,6 @@ jobs:
       - name: Start Kafka
         continue-on-error: true # if we hit the docker pull limit, no kafka
         run: docker compose -f ./src/events/kafka-cluster.yml up -d --no-recreate
-
 
       - name: Cypress e2e tests 🧪
         uses: cypress-io/github-action@v6.7.8
