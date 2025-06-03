@@ -2,6 +2,7 @@ import './commands'
 import './get-token'
 import 'cypress-map'
 import '@bahmutov/cy-api'
+import '@cypress/skip-test/support'
 import type { Movie } from '@prisma/client'
 
 const commonHeaders = (token: string) => ({

@@ -14,7 +14,8 @@ const port = process.env.PORT || 3001
 const config = {
   e2e: {
     env: {
-      ENVIRONMENT: 'local'
+      ENVIRONMENT: 'local',
+      KAFKA_UI_URL: 'http://localhost:8085'
     },
     baseUrl: `http://localhost:${port}`,
     retries: 0
