@@ -50,7 +50,7 @@ jobs:
           start: npm start
           config-file: cypress/config/local.config.ts
           # Enable for for cy cloud
-          record: true
+          # record: true
           group: local
           tag: local
 
