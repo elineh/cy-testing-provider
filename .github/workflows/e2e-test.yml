@@ -12,8 +12,8 @@ env:
   PORT: 3001
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   DATABASE_URL: 'file:./dev.db'
-  # Enable for for cy cloud
-  # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+  CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
   KAFKAJS_NO_PARTITIONER_WARNING: 1 # less kafka noise
 
 jobs:
@@ -49,10 +49,9 @@ jobs:
         with:
           start: npm start
           config-file: cypress/config/local.config.ts
-          # Enable for for cy cloud
-          # record: true
-          group: local
-          tag: local
+          record: ${{ secrets.CYPRESS_RECORD_KEY != '' }}
+          group: ${{ secrets.CYPRESS_RECORD_KEY != '' && 'local' || '' }}
+          tag: ${{ secrets.CYPRESS_RECORD_KEY != '' && 'local' || '' }}
 
       # We do schema testing within the api e2e
       # We publish the OpenAPI spec on main, once after the PR is merged
