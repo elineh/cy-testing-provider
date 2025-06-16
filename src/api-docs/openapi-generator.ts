@@ -151,7 +151,15 @@ registry.registerPath({
   },
   responses: {
     201: {
-      description: 'Movie created successfully',
+      description: 'Movie created successfully, 201 response',
+      content: {
+        'application/json': {
+          schema: CreateMovieResponseSchema
+        }
+      }
+    },
+    200: {
+      description: 'Movie created successfully, 200 response',
       content: {
         'application/json': {
           schema: CreateMovieResponseSchema
