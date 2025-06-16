@@ -150,7 +150,7 @@ registry.registerPath({
     }
   },
   responses: {
-    201: {
+    200: {
       description: 'Movie created successfully',
       content: {
         'application/json': {

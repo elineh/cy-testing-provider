@@ -415,7 +415,7 @@ paths:
             schema:
               $ref: "#/components/schemas/CreateMovieRequest"
       responses:
-        "201":
+        "200":
           description: Movie created successfully
           content:
             application/json:
