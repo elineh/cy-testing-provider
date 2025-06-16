@@ -19,7 +19,8 @@ const config = {
     },
     baseUrl: `http://localhost:${port}`,
     retries: 0
-  }
+  },
+  projectId: process.env.CYPRESS_PROJECT_ID || 'local'
 }
 
 export default defineConfig(merge({}, baseConfig, config))
