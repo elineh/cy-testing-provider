@@ -34,8 +34,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.jest.json",
     "lint": "eslint --ext=.js,.ts,.tsx --fix",
     "generate:openapi": "tsx src/api-docs/openapi-writer.ts",
-    "optic:lint": "optic lint src/api-docs/openapi.yaml",
-    "optic:diff": "optic diff src/api-docs/openapi.yaml --check --web --base main"
+    "spectral:lint": "spectral lint -r spectral:oas src/api-docs/openapi.yaml",
+    "redocly:diff": "git show origin/main:src/api-docs/openapi.yaml > .openapi.base.yaml && redocly diff .openapi.base.yaml src/api-docs/openapi.yaml --fail-on-changed && rm .openapi.base.yaml"
   },
   "devDependencies": {
     "@bahmutov/cy-api": "2.2.8",
@@ -46,6 +46,8 @@
     "@faker-js/faker": "9.4.0",
     "@pact-foundation/pact": "^14.0.0",
     "@pact-foundation/pact-cli": "^16.0.7",
+    "@redocly/cli": "^2.0.5",
+    "@stoplight/spectral-cli": "^6.15.0",
     "@types/cors": "2.8.17",
     "@types/express": "4.17.13",
     "@types/jest": "29.5.14",
@@ -53,7 +55,6 @@
     "@types/node": "22.10.7",
     "@typescript-eslint/eslint-plugin": "8.20.0",
     "@typescript-eslint/parser": "8.20.0",
-    "@useoptic/optic": "^1.0.8",
     "cy-retryable-before": "^1.0.2",
     "cy-spok": "1.6.2",
     "cypress": "^13.17.0",
@@ -71,6 +72,7 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-no-only-tests": "3.3.0",
     "eslint-plugin-prettier": "5.2.2",
+    "is-ci": "^4.1.0",
     "jest": "29.7.0",
     "jest-mock-extended": "^4.0.0-beta1",
     "lodash": "4.17.21",

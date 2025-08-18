@@ -3,8 +3,7 @@ import type {
   VerifierOptions
 } from '@pact-foundation/pact'
 import type { ConsumerVersionSelector } from '@pact-foundation/pact-core'
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const isCI = require('is-ci')
+import isCI from 'is-ci'
 
 /* read https://dev.to/muratkeremozcan/solving-cross-execution-issues-in-pact-testing-with-kafka-and-message-queues-2d2g
  

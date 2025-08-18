@@ -1,6 +1,6 @@
 // producing Kafka events is purely optional
 // for them to be seen in action, the provider repo has to be started
-// docker has to be started, and kafka:start script has be executed in the provider repo
+// docker has to be started, and kafka:start script has to be executed in the provider repo
 // we have e2e tests in the provider that execute if kafka is up
 // the real intent is to test events with pact while no kafka is running
 
@@ -14,7 +14,7 @@ const kafka = new Kafka({
   clientId: 'movie-provider',
   brokers: ['localhost:29092'],
   // reduce retries and delays
-  // so that thos who don't start docker still have their crud fast
+  // so that those who don't start docker still have their crud fast
   retry: {
     retries: 2,
     initialRetryTime: 100, // initial delay (default is 300ms)

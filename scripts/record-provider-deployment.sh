@@ -16,8 +16,8 @@ if ["$GITHUB_BRANCH" = "main"]; then
 
     # Kafka related
     # # Record deployment for MoviesAPI-event-producer
-    # pact-broker record-deployment \
-    #     --pacticipant MoviesAPI-event-producer \
-    #     --version $GITHUB_SHA \
-    #     --environment $npm_config_env
+    pact-broker record-deployment \
+        --pacticipant MoviesAPI-event-producer \
+        --version $GITHUB_SHA \
+        --environment $npm_config_env
 fi
