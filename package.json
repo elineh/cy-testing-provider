@@ -34,8 +34,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.jest.json",
     "lint": "eslint --ext=.js,.ts,.tsx --fix",
     "generate:openapi": "tsx src/api-docs/openapi-writer.ts",
-    "spectral:lint": "spectral lint -r spectral:oas src/api-docs/openapi.yaml",
-    "redocly:diff": "git show origin/main:src/api-docs/openapi.yaml > .openapi.base.yaml && redocly diff .openapi.base.yaml src/api-docs/openapi.yaml --fail-on-changed && rm .openapi.base.yaml"
+    "optic:lint": "optic lint src/api-docs/openapi.yaml",
+    "optic:diff": "optic diff src/api-docs/openapi.yaml --check --web --base main"
   },
   "devDependencies": {
     "@bahmutov/cy-api": "2.2.8",
@@ -55,6 +55,7 @@
     "@types/node": "22.10.7",
     "@typescript-eslint/eslint-plugin": "8.20.0",
     "@typescript-eslint/parser": "8.20.0",
+    "@useoptic/optic": "^1.0.9",
     "cy-retryable-before": "^1.0.2",
     "cy-spok": "1.6.2",
     "cypress": "^13.17.0",
