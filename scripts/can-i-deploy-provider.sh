@@ -22,3 +22,5 @@ pact-broker can-i-deploy \
         --to-environment dev \
         --broker-base-url=$PACT_BROKER_BASE_URL \
         --verbose
+
+        # trigger
