@@ -10,7 +10,7 @@ set -e
 pact-broker can-i-deploy \
     --pacticipant MoviesAPI \
     --version=$GITHUB_SHA \
-    --to-environment dev \
+    --to-environment test \
     --broker-base-url=$PACT_BROKER_BASE_URL \
     --verbose
 
@@ -19,8 +19,6 @@ pact-broker can-i-deploy \
     pact-broker can-i-deploy \
         --pacticipant MoviesAPI-event-producer \
         --version=$GITHUB_SHA \
-        --to-environment dev \
+        --to-environment test \
         --broker-base-url=$PACT_BROKER_BASE_URL \
         --verbose
-
-        # trigger
