@@ -7,7 +7,7 @@ set -e
 . ./scripts/env-setup.sh
 
 # Record provider deployment for the main branch
-if ["$GITHUB_BRANCH" = "main"]; then
+if [ "$GITHUB_BRANCH" = "main" ]; then
 # Record deployment for MoviesAPI
     pact-broker record-deployment \
         --pacticipant MoviesAPI \
