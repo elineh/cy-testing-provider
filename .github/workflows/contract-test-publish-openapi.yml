@@ -40,4 +40,4 @@ jobs:
 
       - name: Record provider deployment
         if: github.ref == 'refs/heads/main'
-        run: npm run record:provider:birectional:deployment --env=test
+        run: npm run record:provider:bidirectional:deployment --env=test
