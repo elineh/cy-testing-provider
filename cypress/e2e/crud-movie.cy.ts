@@ -1,7 +1,7 @@
 import 'cypress-ajv-schema-validator'
 import type { Movie } from '@prisma/client'
 import { generateMovieWithoutId } from '../../src/test-helpers/factories'
-import spok from 'cy-spok'
+const spok = require('cy-spok')
 import jsonSchema from '../../src/api-docs/openapi.json'
 import { retryableBefore } from 'cy-retryable-before'
 import type { OpenAPIV3_1 } from 'openapi-types'
@@ -30,19 +30,11 @@ describe('CRUD movie', () => {
     cy.addMovie(token, movie)
       .validateSchema(schema, { endpoint: '/movies', method: 'POST' })
       .its('body')
-      .should(
-        spok({
-          status: 200,
-          data: movieProps
-        })
-      )
+      .should(spok({ status: 200, data: movieProps }))
       .its('data.id')
       .then((id) => {
         cy.getAllMovies(token)
-          .validateSchema(schema, {
-            endpoint: '/movies',
-            method: 'GET'
-          })
+          .validateSchema(schema, { endpoint: '/movies', method: 'GET' })
           .its('body')
           .should(
             spok({
@@ -56,31 +48,15 @@ describe('CRUD movie', () => {
           )
 
         cy.getMovieById(token, id)
-          .validateSchema(schema, {
-            endpoint: '/movies/{id}',
-            method: 'GET'
-          })
+          .validateSchema(schema, { endpoint: '/movies/{id}', method: 'GET' })
           .its('body')
-          .should(
-            spok({
-              status: 200,
-              data: movieProps
-            })
-          )
+          .should(spok({ status: 200, data: movieProps }))
           .its('data.name')
           .then((name) => {
             cy.getMovieByName(token, name)
-              .validateSchema(schema, {
-                endpoint: '/movies',
-                method: 'GET'
-              })
+              .validateSchema(schema, { endpoint: '/movies', method: 'GET' })
               .its('body')
-              .should(
-                spok({
-                  status: 200,
-                  data: movieProps
-                })
-              )
+              .should(spok({ status: 200, data: movieProps }))
           })
 
         cy.updateMovie(token, id, updatedMovie)
@@ -90,15 +66,7 @@ describe('CRUD movie', () => {
             status: 200
           })
           .its('body')
-          .should(
-            spok({
-              status: 200,
-              data: {
-                id,
-                ...updatedMovie
-              }
-            })
-          )
+          .should(spok({ status: 200, data: { id, ...updatedMovie } }))
 
         cy.deleteMovie(token, id)
           .validateSchema(schema, {
@@ -121,12 +89,7 @@ describe('CRUD movie', () => {
             status: 404
           })
           .its('body')
-          .should(
-            spok({
-              status: 404,
-              error: `Movie with ID ${id} not found`
-            })
-          )
+          .should(spok({ status: 404, error: `Movie with ID ${id} not found` }))
       })
   })
 })
