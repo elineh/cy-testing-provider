@@ -1,7 +1,7 @@
 import 'cypress-ajv-schema-validator'
 import type { Movie } from '@prisma/client'
 import { generateMovieWithoutId } from '../../src/test-helpers/factories'
-import spok from 'cy-spok'
+const spok = require('cy-spok')
 import schema from '../../src/api-docs/openapi.json'
 import { retryableBefore } from 'cy-retryable-before'
 import type { OpenAPIV3_1 } from 'openapi-types'
@@ -26,9 +26,7 @@ describe('CRUD movie', () => {
     // if Kafka UI is not running, skip the test
     cy.exec(
       `curl -s -o /dev/null -w "%{http_code}" ${Cypress.env('KAFKA_UI_URL')}`,
-      {
-        failOnNonZeroExit: false
-      }
+      { failOnNonZeroExit: false }
     ).then((res) => {
       cy.log('**npm run kafka:start to enable this test**')
       cy.skipOn(res.stdout !== '200')
@@ -43,12 +41,7 @@ describe('CRUD movie', () => {
     cy.addMovie(token, movie)
       .validateSchema(typedSchema, { endpoint: '/movies', method: 'POST' })
       .its('body')
-      .should(
-        spok({
-          status: 200,
-          data: movieProps
-        })
-      )
+      .should(spok({ status: 200, data: movieProps }))
       .its('data.id')
       .then((id) => {
         // check kafka
@@ -58,19 +51,13 @@ describe('CRUD movie', () => {
             {
               topic: 'movie-created',
               key: String(id),
-              movie: {
-                id,
-                ...movieProps
-              }
+              movie: { id, ...movieProps }
             }
           ])
         )
 
         cy.getAllMovies(token)
-          .validateSchema(typedSchema, {
-            endpoint: '/movies',
-            method: 'GET'
-          })
+          .validateSchema(typedSchema, { endpoint: '/movies', method: 'GET' })
           .its('body')
           .should(
             spok({
@@ -89,12 +76,7 @@ describe('CRUD movie', () => {
             method: 'GET'
           })
           .its('body')
-          .should(
-            spok({
-              status: 200,
-              data: movieProps
-            })
-          )
+          .should(spok({ status: 200, data: movieProps }))
           .its('data.name')
           .then((name) => {
             cy.getMovieByName(token, name)
@@ -103,12 +85,7 @@ describe('CRUD movie', () => {
                 method: 'GET'
               })
               .its('body')
-              .should(
-                spok({
-                  status: 200,
-                  data: movieProps
-                })
-              )
+              .should(spok({ status: 200, data: movieProps }))
           })
 
         cy.updateMovie(token, id, updatedMovie)
@@ -118,15 +95,7 @@ describe('CRUD movie', () => {
             status: 200
           })
           .its('body')
-          .should(
-            spok({
-              status: 200,
-              data: {
-                id,
-                ...updatedMovie
-              }
-            })
-          )
+          .should(spok({ status: 200, data: { id, ...updatedMovie } }))
 
         // Check kafka
         recurse(
@@ -135,10 +104,7 @@ describe('CRUD movie', () => {
             {
               topic: 'movie-updated',
               key: String(id),
-              movie: {
-                id,
-                ...movieProps
-              }
+              movie: { id, ...movieProps }
             }
           ])
         )
@@ -161,10 +127,7 @@ describe('CRUD movie', () => {
             {
               topic: 'movie-deleted',
               key: String(id),
-              movie: {
-                id,
-                ...movieProps
-              }
+              movie: { id, ...movieProps }
             }
           ])
         )
@@ -179,12 +142,7 @@ describe('CRUD movie', () => {
             status: 404
           })
           .its('body')
-          .should(
-            spok({
-              status: 404,
-              error: `Movie with ID ${id} not found`
-            })
-          )
+          .should(spok({ status: 404, error: `Movie with ID ${id} not found` }))
       })
   })
 })
