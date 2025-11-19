@@ -4,12 +4,16 @@
   "rebaseWhen": "conflicted",
   "prHourlyLimit": 2,
   "updateNotScheduled": false,
-  "timezone": "America/New_York",
   "schedule": ["after 10pm and before 5am on every weekday", "every weekend"],
   "masterIssue": true,
   "labels": ["type: dependencies", "renovate"],
   "dependencyDashboardApproval": false,
   "packageRules": [
+    {
+      "matchPackageNames": ["cypress"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
     {
       "groupName": "All Minor and Patch Updates",
       "matchUpdateTypes": ["minor", "patch"]
