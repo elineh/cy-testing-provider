@@ -86,11 +86,11 @@
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.3.0",
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "^7.0.0",
     "cors": "^2.8.5",
     "express": "^5.0.0",
     "kafkajs": "^2.2.4",
-    "prisma": "^6.2.1",
+    "prisma": "^7.0.0",
     "zod": "^3.24.1"
   }
 }
