@@ -1,11 +1,15 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:recommended"],
   "automerge": true,
   "rebaseWhen": "conflicted",
   "prHourlyLimit": 2,
   "updateNotScheduled": false,
-  "schedule": ["after 10pm and before 5am on every weekday", "every weekend"],
-  "masterIssue": true,
+  "schedule": [
+    "after 10pm every weekday",
+    "every weekend",
+    "before 5am every weekday"
+  ],
+  "dependencyDashboard": true,
   "labels": ["type: dependencies", "renovate"],
   "dependencyDashboardApproval": false,
   "packageRules": [

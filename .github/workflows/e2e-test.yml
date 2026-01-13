@@ -22,7 +22,7 @@ jobs:
   cy-e2e-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref }}
 
@@ -48,7 +48,7 @@ jobs:
 
       - name: Cypress e2e tests 🧪
         id: cypress-tests
-        uses: cypress-io/github-action@v6.10.2
+        uses: cypress-io/github-action@v6.10.8
         with:
           start: npm start
           config-file: cypress/config/local.config.ts
