@@ -1,6 +1,7 @@
 import 'cypress-ajv-schema-validator'
 import type { Movie } from '@prisma/client'
 import { generateMovieWithoutId } from '../../src/test-helpers/factories'
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const spok = require('cy-spok')
 import jsonSchema from '../../src/api-docs/openapi.json'
 import { retryableBefore } from 'cy-retryable-before'
