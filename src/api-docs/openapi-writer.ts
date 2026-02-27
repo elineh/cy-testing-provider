@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { __dirname } from '../../cypress/config/dirname.config'
 import { stringify } from 'yaml'
 import { openApiDoc } from './openapi-generator'
 

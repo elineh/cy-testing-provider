@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Murat Ozcan",
   "license": "ISC",
+  "type": "module",
   "scripts": {
     "cy:run-local-base": "cypress run --e2e --browser chrome --config-file cypress/config/local.config.ts",
     "cy:run-local": "npm run cy:run-local-base",
@@ -61,13 +62,14 @@
     "cypress-map": "1.56.0",
     "cypress-recurse": "^1.35.3",
     "dotenv": "17.3.1",
-    "eslint": "8.57.1",
+    "eslint": "^9.39.3",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",
-    "eslint-plugin-cypress": "3.6.0",
+    "eslint-plugin-check-file": "^3.3.1",
+    "eslint-plugin-cypress": "^6.1.0",
     "eslint-plugin-filenames": "1.3.2",
     "eslint-plugin-implicit-dependencies": "1.1.1",
-    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-import-x": "^4.16.1",
     "eslint-plugin-no-only-tests": "3.3.0",
     "eslint-plugin-prettier": "5.5.5",
     "got": "^14.6.6",
@@ -84,7 +86,8 @@
     "ts-jest": "29.4.6",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.1",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.56.1"
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.3.0",
