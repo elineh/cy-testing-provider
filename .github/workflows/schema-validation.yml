@@ -52,7 +52,7 @@ jobs:
 
       - name: Commit and push OpenAPI changes
         if: steps.check_changes.outputs.changes == 'true'
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           author_name: 'GitHub Actions'
           author_email: 'actions@github.com'
