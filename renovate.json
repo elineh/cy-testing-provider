@@ -1,26 +1,22 @@
 {
   "extends": ["config:recommended"],
-  "automerge": true,
-  "rebaseWhen": "conflicted",
-  "prHourlyLimit": 2,
-  "updateNotScheduled": false,
-  "schedule": [
-    "after 10pm every weekday",
-    "every weekend",
-    "before 5am every weekday"
-  ],
+  "automerge": false,
   "dependencyDashboard": true,
   "labels": ["type: dependencies", "renovate"],
-  "dependencyDashboardApproval": false,
+  "schedule": ["never"],
+  "prCreation": "approval",
+  "dependencyDashboardApproval": true,
   "packageRules": [
     {
-      "matchPackageNames": ["cypress"],
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": ["minor", "patch", "major"],
       "enabled": false
     },
     {
-      "groupName": "All Minor and Patch Updates",
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchCategories": ["security"],
+      "enabled": true,
+      "automerge": false,
+      "dependencyDashboardApproval": false,
+      "labels": ["type: dependencies", "renovate", "security"]
     }
   ]
 }
